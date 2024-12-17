@@ -3,22 +3,21 @@ using Microsoft.AspNetCore.Identity;
 
 namespace ChatApp.Services;
 
-public class GuestCleanupService : BackgroundService
+public class GuestCleanupService(
+    ILogger<GuestCleanupService> _logger,
+    IServiceScopeFactory _serviceScopeFactory
+    ) : BackgroundService
 {
-    private readonly UserManager<User> _userManager;
-    private readonly ILogger<GuestCleanupService> _logger;
-
-    public GuestCleanupService(UserManager<User> userManager, ILogger<GuestCleanupService> logger)
-    {
-        _logger = logger;
-        _userManager = userManager;
-    }
 
     protected override async Task ExecuteAsync(CancellationToken cancellationToken)
     {
         while (!cancellationToken.IsCancellationRequested)
         {
             _logger.LogInformation("Cleaning up guest users.");
+
+            using IServiceScope scope = _serviceScopeFactory.CreateScope();
+
+            var _userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 
             // Lógica de limpieza de cuentas guest
 

@@ -2,13 +2,13 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace ChatApp.Data
+
+namespace ChatApp.Data;
+
+public class ApplicationContext : IdentityDbContext<User>
 {
-    public class ApplicationContext : IdentityDbContext<User>
+    public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
     {
-        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
-        {
-            
-        }
+        
     }
 }

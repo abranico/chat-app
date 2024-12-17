@@ -17,11 +17,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddHostedService<GuestCleanupService>();
+
+
+
 
 string connectionString = builder.Configuration["ConnectionStrings:DefaultConnection"]!;
-builder.Services.AddDbContext<ApplicationContext>(o => 
-o.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 33))));
+builder.Services.AddDbContext<ApplicationContext>(options => options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 33))));
+
 
 builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
@@ -47,6 +49,9 @@ builder.Services.AddCors(options =>
         .AllowCredentials();
     });
 });
+
+builder.Services.AddHostedService<GuestCleanupService>();
+
 
 var app = builder.Build();
 
