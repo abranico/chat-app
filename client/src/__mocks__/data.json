@@ -1,0 +1,79 @@
+{
+  "users": [
+    {
+      "id": "b4e1b4e7-12f9-4f44-8b23-8a1d3563b1e6",
+      "username": "John Doe",
+      "created_at": "2024-12-01T10:30:00Z",
+      "email": "john@example.com"
+    },
+    {
+      "id": "9a832b9b-342d-4c6a-8c42-5f5a61e09fb4",
+      "username": "Jane Smith",
+      "created_at": "2024-12-02T14:45:00Z",
+      "email": null
+    }
+  ],
+  "rooms": [
+    {
+      "id": "3f5b8c6e-a1d2-42e4-b3d4-0f7a37fba0f7",
+      "room_code": "3f5b8c6e",
+      "name": "General Chat",
+      "room_type": "public",
+      "last_message": {
+        "id": "76e2bfa3-45c1-4f3e-a59b-f56c8a39289b",
+        "content": "Hello everyone!",
+        "send_by": {
+          "id": "b4e1b4e7-12f9-4f44-8b23-8a1d3563b1e6",
+          "username": "John Doe",
+          "created_at": "2024-12-01T10:30:00Z",
+          "email": "john@example.com"
+        },
+        "room_id": "3f5b8c6e-a1d2-42e4-b3d4-0f7a37fba0f7",
+        "created_at": "2024-12-05T15:00:00Z"
+      },
+      "created_by": {
+        "id": "b4e1b4e7-12f9-4f44-8b23-8a1d3563b1e6",
+        "username": "John Doe",
+        "created_at": "2024-12-01T10:30:00Z",
+        "email": "john@example.com"
+      },
+      "created_at": "2024-12-01T10:35:00Z",
+      "members": [
+        {
+          "id": "b4e1b4e7-12f9-4f44-8b23-8a1d3563b1e6",
+          "username": "John Doe",
+          "created_at": "2024-12-01T10:30:00Z",
+          "email": "john@example.com"
+        },
+        {
+          "id": "9a832b9b-342d-4c6a-8c42-5f5a61e09fb4",
+          "username": "Jane Smith",
+          "created_at": "2024-12-02T14:45:00Z",
+          "email": null
+        }
+      ]
+    },
+    {
+      "id": "7c15d92a-bf0e-493e-bf15-2cfa09c6e14a",
+      "room_code": "7c15d92a",
+      "name": "Tech Talk",
+      "room_type": "private",
+      "last_message": null,
+      "created_by": {
+        "id": "9a832b9b-342d-4c6a-8c42-5f5a61e09fb4",
+        "username": "Jane Smith",
+        "created_at": "2024-12-02T14:45:00Z",
+        "email": null
+      },
+      "created_at": "2024-12-02T12:00:00Z",
+      "members": [
+        {
+          "id": "9a832b9b-342d-4c6a-8c42-5f5a61e09fb4",
+          "username": "Jane Smith",
+          "created_at": "2024-12-02T14:45:00Z",
+          "email": null
+        }
+      ]
+    }
+  ]
+}
