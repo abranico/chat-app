@@ -14,12 +14,13 @@ export default function ThemeContextProvider({
 }: {
   children: JSX.Element;
 }) {
-  const [theme, setTheme] = useState<string>(() =>
-    localStorage.getItem("__themeChat__") ||
-    window.matchMedia("(prefers-color-scheme: dark)").matches
+  const [theme, setTheme] = useState<string>(() => {
+    const storedTheme = localStorage.getItem("__themeChat__");
+    if (storedTheme) return storedTheme;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
-      : "light"
-  );
+      : "light";
+  });
 
   const handleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";

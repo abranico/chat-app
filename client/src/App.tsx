@@ -12,12 +12,16 @@ import Header from "./components/Header";
 import Chat from "./components/Chat";
 import SendInput from "./components/SendInput";
 import { createPortal } from "react-dom";
+import { useAuth } from "./context/auth.context";
+import Loading from "./components/Loading";
 
 export const SignalrEvents = {
   ReceiveMessage: "ReceiveMessage",
 } as const;
 
 function App() {
+  const { auth, loading } = useAuth();
+
   const [connection, setConnection] = useState<HubConnection>();
   const [messages, setMessages] = useState<Message[]>([]);
   const [selectedRoom, setSelectedRoom] = useState<Room | undefined | boolean>(
@@ -112,6 +116,8 @@ function App() {
       window.removeEventListener("keydown", unselectRoom);
     };
   }, []);
+
+  if (loading) return <Loading />;
 
   return (
     // <>

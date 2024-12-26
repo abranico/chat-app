@@ -1,3 +1,4 @@
+import { useAuth } from "@/context/auth.context";
 import { useTheme } from "@/context/theme.context";
 import {
   MessageSquare,
@@ -16,6 +17,7 @@ interface NavbarProps {
 
 export default function Navbar({ onSelectRoom, selectedRoom }: NavbarProps) {
   const { handleTheme, theme } = useTheme();
+  const { auth } = useAuth();
 
   return (
     <nav className="max-w-sm w-full flex flex-col bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700">
@@ -62,9 +64,9 @@ export default function Navbar({ onSelectRoom, selectedRoom }: NavbarProps) {
         </li>
       </ul>
       <footer className="border-t border-gray-200 dark:border-gray-700 mt-auto flex justify-between items-center p-4 h-16">
-        <div className="flex">
+        <div className="flex gap-2">
           <User />
-          <p>Guest</p>
+          <p>{auth?.username}</p>
         </div>
         <div className="flex gap-2">
           <span

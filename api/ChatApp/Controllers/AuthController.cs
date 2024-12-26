@@ -1,5 +1,6 @@
 ﻿using ChatApp.Models;
 using ChatApp.Models.Requests;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,22 +15,26 @@ namespace ChatApp.Controllers;
 [ApiController]
 public class AuthController : ControllerBase
 {
-    private readonly UserManager<IdentityUser> _userManager;
-    private readonly SignInManager<IdentityUser> _signInManager;
+    private readonly UserManager<User> _userManager;
+    private readonly SignInManager<User> _signInManager;
 
-    public AuthController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+    public AuthController(UserManager<User> userManager, SignInManager<User> signInManager)
     {
         _userManager = userManager;
         _signInManager = signInManager;
 
     }
 
-    [HttpPost("me")]
+    [HttpGet("me")]
     public async Task<IActionResult> GuestLogin()
     {
+
         if (User.Identity.IsAuthenticated)
         {
-            return Ok("Session already active.");
+            return Ok(new {
+                id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value,
+                username = User.Identity?.Name,
+            });
         }
 
         var guestUsername = "guest_" + Guid.NewGuid().ToString().Substring(0, 8);
@@ -37,6 +42,7 @@ public class AuthController : ControllerBase
         var guestUser = new User
         {
             UserName = guestUsername,
+            Email = $"{guestUsername}@guest.local",
             IsGuest = true,
         };
 
