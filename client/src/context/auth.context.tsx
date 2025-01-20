@@ -1,3 +1,4 @@
+import Loading from "@/components/Loading";
 import { User } from "@/models/user.model";
 import React, {
   createContext,
@@ -47,6 +48,8 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
   const logout = () => {
     setAuth(null);
   };
+
+  if (loading) return <Loading />;
 
   return (
     <AuthContext.Provider value={{ auth, logout, loading }}>
